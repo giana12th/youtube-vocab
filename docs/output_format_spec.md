@@ -7,7 +7,7 @@
 | `{date}_{videoID}_quiz_result.csv` | 不正解単語の記録・再利用 |
 | `{date}_{videoID}_wordlist.md` | クイズ後の参照用単語リスト |
 
-日付フォーマット：`YYYYMMDD`（例: `20240315_dQw4w9WgXcQ_quiz_result.csv`）
+日付フォーマット：`YYYYMMDD`（例: `20240315_VIDEO_ID_quiz_result.csv`）
 
 ---
 

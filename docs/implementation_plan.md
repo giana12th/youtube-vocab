@@ -256,7 +256,7 @@ Step 1（初期化）
 
 ```bash
 # 字幕取得の確認
-uv run subtitle.py https://youtube.com/watch?v=dQw4w9WgXcQ
+uv run subtitle.py https://youtube.com/watch?v=VIDEO_ID
 
 # 単語抽出の確認（output/に_source.txtがある状態で）
 uv run extractor.py

@@ -16,12 +16,12 @@
 
 | 入力源 | `id` 部分の決め方 |
 |---|---|
-| YouTube URL | YouTube動画ID（例: `ZY34OTV30Ck`） |
+| YouTube URL | YouTube動画ID（例: `VIDEO_ID`） |
 | テキストファイル | ファイル名から拡張子を除いたもの（例: `my_article`） |
 
 例：
 ```
-output/20240315_ZY34OTV30Ck_source.txt
+output/20240315_VIDEO_ID_source.txt
 output/20240315_my_article_source.txt
 ```
 

@@ -5,7 +5,7 @@
 Python の実行は `uv run` を使う。
 
 ```bash
-uv run main.py https://youtube.com/watch?v=ZY34OTV30Ck
+uv run main.py https://youtube.com/watch?v=VIDEO_ID
 uv run extractor.py
 ```
 
@@ -52,7 +52,7 @@ URLまたはファイル名が確定した時点でセッションIDが決まる
 {YYYYMMDD}_{id}
 
 例：
-20260228_ZY34OTV30Ck   # YouTube動画ID
+20260228_VIDEO_ID   # YouTube動画ID
 20260228_my_article    # テキストファイル名（拡張子除く）
 ```
 
@@ -60,11 +60,11 @@ URLまたはファイル名が確定した時点でセッションIDが決まる
 
 ```
 output/
-├── 20260228_ZY34OTV30Ck_source.txt
-├── 20260228_ZY34OTV30Ck_wordlist.json
-├── 20260228_ZY34OTV30Ck_quiz.json
-├── 20260228_ZY34OTV30Ck_quiz_result.csv
-└── 20260228_ZY34OTV30Ck_wordlist.md
+├── 20260228_VIDEO_ID_source.txt
+├── 20260228_VIDEO_ID_wordlist.json
+├── 20260228_VIDEO_ID_quiz.json
+├── 20260228_VIDEO_ID_quiz_result.csv
+└── 20260228_VIDEO_ID_wordlist.md
 ```
 
 ---
@@ -75,7 +75,7 @@ output/
 
 ```bash
 # YouTube URL
-uv run main.py https://youtube.com/watch?v=ZY34OTV30Ck
+uv run main.py https://youtube.com/watch?v=VIDEO_ID
 
 # テキストファイル
 uv run main.py my_article.txt
@@ -92,7 +92,7 @@ uv run main.py my_article.txt
 
 ```bash
 # ステップ1：入力源に応じて使い分け
-uv run subtitle.py https://youtube.com/watch?v=ZY34OTV30Ck
+uv run subtitle.py https://youtube.com/watch?v=VIDEO_ID
 uv run source.py my_article.txt
 
 # ステップ2以降：引数省略で最新セッションを自動検出
@@ -101,8 +101,8 @@ uv run explainer.py
 uv run quiz.py
 
 # セッション指定（特定セッションを再実行したい場合）
-uv run explainer.py 20260228_ZY34OTV30Ck
-uv run quiz.py 20260228_ZY34OTV30Ck
+uv run explainer.py 20260228_VIDEO_ID
+uv run quiz.py 20260228_VIDEO_ID
 ```
 
 ### 途中からの再実行
@@ -172,7 +172,7 @@ Claude Code は `claude -p` のワンショットモードで呼び出す。
 - 字幕取得（`subtitle.py`）で字幕が存在しない場合はエラー終了する。複数の字幕トラックが存在する場合は手動字幕を優先し、手動字幕がなければ自動生成字幕を使用する。言語は `en` を優先する。
 
 ```
-[ERROR] extractor.py: source.txt が見つかりません: output/20260228_ZY34OTV30Ck_source.txt
+[ERROR] extractor.py: source.txt が見つかりません: output/20260228_VIDEO_ID_source.txt
 [ERROR] explainer.py: claude コマンドが見つかりません。Claude Code がインストールされているか確認してください。
 [ERROR] explainer.py: Claude のレスポンスを JSON としてパースできませんでした。
 ```

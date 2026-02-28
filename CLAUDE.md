@@ -42,7 +42,7 @@ No automated tests — verify by running each step manually against real data.
 
 ### Session ID
 
-Format: `{YYYYMMDD}_{id}` (e.g., `20260228_ZY34OTV30Ck`)
+Format: `{YYYYMMDD}_{id}` (e.g., `20260228_VIDEO_ID`)
 - YouTube URL → video ID extracted via `urllib.parse`
 - Text file → `Path(filepath).stem` (truncated to 20 chars)
 

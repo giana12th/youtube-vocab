@@ -8,7 +8,7 @@
 | `{date}_{videoID}_prompt.md` | Claude呼び出し前 | `explainer.py` | `claude -p` に渡すプロンプト |
 | `{date}_{videoID}_quiz.json` | Claude処理後 | `explainer.py` | クイズ実行の入力 |
 
-日付フォーマット：`YYYYMMDD`（例: `20240315_ZY34OTV30Ck_wordlist.json`）
+日付フォーマット：`YYYYMMDD`（例: `20240315_VIDEO_ID_wordlist.json`）
 
 ---
 
@@ -175,9 +175,9 @@ Claudeには以下の形式でJSONのみを返すよう指示する。`explainer
 
 ```
 output/
-├── 20240315_ZY34OTV30Ck_wordlist.json    # 単語抽出結果（最大20件）
-├── 20240315_ZY34OTV30Ck_prompt.md        # claude -p に渡したプロンプト
-├── 20240315_ZY34OTV30Ck_quiz.json        # クイズデータ
-├── 20240315_ZY34OTV30Ck_quiz_result.csv  # 不正解単語
-└── 20240315_ZY34OTV30Ck_wordlist.md      # 全単語リスト（参照用）
+├── 20240315_VIDEO_ID_wordlist.json    # 単語抽出結果（最大20件）
+├── 20240315_VIDEO_ID_prompt.md        # claude -p に渡したプロンプト
+├── 20240315_VIDEO_ID_quiz.json        # クイズデータ
+├── 20240315_VIDEO_ID_quiz_result.csv  # 不正解単語
+└── 20240315_VIDEO_ID_wordlist.md      # 全単語リスト（参照用）
 ```
