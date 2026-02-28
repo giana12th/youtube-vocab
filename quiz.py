@@ -11,15 +11,7 @@ import random
 import sys
 from pathlib import Path
 
-
-def _detect_latest_session() -> str:
-    """output/ 内の最新セッションIDを自動検出する。"""
-    output_dir = Path("output")
-    files = list(output_dir.glob("*_source.txt"))
-    if not files:
-        raise FileNotFoundError("output/ にセッションが見つかりません")
-    files.sort(key=lambda f: (f.name[:8], f.stat().st_mtime), reverse=True)
-    return files[0].name.replace("_source.txt", "")
+from util import detect_latest_session
 
 
 def _run_quiz(questions: list) -> list[dict]:
@@ -206,5 +198,5 @@ if __name__ == "__main__":
     if len(sys.argv) >= 2:
         sid = sys.argv[1]
     else:
-        sid = _detect_latest_session()
+        sid = detect_latest_session()
     run(sid)

@@ -11,24 +11,11 @@ import spacy
 from wordfreq import zipf_frequency
 
 import config
+from util import detect_latest_session
 
 TARGET_POS = {"ADJ", "ADV", "VERB"}
 POS_PRIORITY = {"ADJ": 0, "ADV": 1, "VERB": 2}
 MAX_WORDS = 20
-
-
-def _detect_latest_session() -> str:
-    """output/ 内の最新セッションIDを自動検出する。
-
-    _source.txt のファイル名から日付部分を取得し、
-    日付+mtimeソートで最新を返す。
-    """
-    output_dir = Path("output")
-    files = list(output_dir.glob("*_source.txt"))
-    if not files:
-        raise FileNotFoundError("output/ にセッションが見つかりません")
-    files.sort(key=lambda f: (f.name[:8], f.stat().st_mtime), reverse=True)
-    return files[0].name.replace("_source.txt", "")
 
 
 def run(session_id: str) -> None:
@@ -102,5 +89,5 @@ if __name__ == "__main__":
     if len(sys.argv) >= 2:
         sid = sys.argv[1]
     else:
-        sid = _detect_latest_session()
+        sid = detect_latest_session()
     run(sid)

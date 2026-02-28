@@ -12,6 +12,8 @@ import subprocess
 import sys
 from pathlib import Path
 
+from util import detect_latest_session
+
 INSTRUCTIONS_TEMPLATE = """\
 ## Instructions
 
@@ -42,16 +44,6 @@ Output format:
 - JSON array ONLY
 - No markdown, no code fences, no preamble, no explanation
 - One object per word, in the same order as the input"""
-
-
-def _detect_latest_session() -> str:
-    """output/ 内の最新セッションIDを自動検出する。"""
-    output_dir = Path("output")
-    files = list(output_dir.glob("*_source.txt"))
-    if not files:
-        raise FileNotFoundError("output/ にセッションが見つかりません")
-    files.sort(key=lambda f: (f.name[:8], f.stat().st_mtime), reverse=True)
-    return files[0].name.replace("_source.txt", "")
 
 
 def _parse_claude_output(raw: str) -> list:
@@ -224,5 +216,5 @@ if __name__ == "__main__":
     if len(sys.argv) >= 2:
         sid = sys.argv[1]
     else:
-        sid = _detect_latest_session()
+        sid = detect_latest_session()
     run(sid)
