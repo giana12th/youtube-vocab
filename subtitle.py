@@ -50,31 +50,15 @@ def run(url: str) -> str:
     print(f"[INFO] subtitle.py: 字幕を取得中... ({video_id})")
 
     try:
-        transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
+        ytt_api = YouTubeTranscriptApi()
+        fetched = ytt_api.fetch(video_id, languages=["en"])
     except Exception as e:
-        print(f"[ERROR] subtitle.py: 字幕が見つかりません: {e}", file=sys.stderr)
+        print(f"[ERROR] subtitle.py: 英語字幕が見つかりません: {e}", file=sys.stderr)
         sys.exit(1)
 
-    # 手動字幕優先で英語字幕を取得
-    transcript = None
-    try:
-        transcript = transcript_list.find_transcript(["en"])
-    except Exception:
-        # 手動英語字幕がない場合、自動生成字幕を試す
-        try:
-            generated = transcript_list.find_generated_transcript(["en"])
-            transcript = generated
-        except Exception:
-            pass
-
-    if transcript is None:
-        print("[ERROR] subtitle.py: 英語字幕が見つかりません", file=sys.stderr)
-        sys.exit(1)
-
-    snippets = transcript.fetch()
     # snippet.text の改行を空白に置換してから結合
     lines = []
-    for snippet in snippets:
+    for snippet in fetched:
         text = snippet.text.replace("\n", " ")
         lines.append(text)
     content = "\r\n".join(lines)
