@@ -125,6 +125,7 @@ def run(session_id: str) -> None:
         input=prompt_text,
         capture_output=True,
         text=True,
+        encoding="utf-8",
     )
 
     if result.returncode != 0:
