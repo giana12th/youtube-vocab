@@ -28,7 +28,7 @@ output a JSON array where each item contains:
 Rules for "correct":
 - Translate based on how the word is used in the given sentence
 - Use natural Japanese (not overly literal)
-- Keep it concise: aim for 2–6 characters
+- Keep it concise: aim for 2-6 characters
 
 Rules for "distractors":
 - Each distractor must be a real Japanese word or phrase

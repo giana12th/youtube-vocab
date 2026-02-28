@@ -38,7 +38,7 @@ No automated tests — verify by running each step manually against real data.
 | 3 | `explainer.py` | `_wordlist.json` | `_prompt.md`, `_quiz.json` |
 | 4 | `quiz.py` | `_quiz.json` | `_quiz_result.csv`, `_wordlist.md` |
 
-`main.py` imports each module and calls `run(session_id)`. Steps 2–4 use a common `run(session_id: str) -> None` interface; steps 1a/1b return the session ID.
+`main.py` imports each module and calls `run(session_id)`. Steps 2-4 use a common `run(session_id: str) -> None` interface; steps 1a/1b return the session ID.
 
 ### Session ID
 
@@ -50,7 +50,7 @@ All intermediate files live in `output/` with this prefix.
 
 ### Key Design Points
 
-- `_source.txt` is skipped (not regenerated) if it already exists; steps 2–4 always regenerate
+- `_source.txt` is skipped (not regenerated) if it already exists; steps 2-4 always regenerate
 - `extractor.py` filters to ADJ/ADV/VERB with `zipf_frequency < 4.0`, capped at 20 words. The zipf threshold is configured in `config.py`
 - `explainer.py` calls `claude -p` via `subprocess.run(..., input=prompt_text)` (stdin, not shell args). Prompt is saved to `_prompt.md` for debugging
 - Claude's JSON response uses 3-stage fallback parsing (`json.loads` → extract from ` ```json ``` ` → extract `[...]`)
