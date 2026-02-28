@@ -65,7 +65,7 @@ def _parse_claude_output(raw: str) -> list:
         pass
 
     # 2. ```json ... ``` ブロックの抽出
-    match = re.search(r"```(?:json)?\s*(\[.*?\])\s*```", raw, re.DOTALL)
+    match = re.search(r"```(?:json)?\s*(\[[^\]]*\])\s*```", raw, re.DOTALL)
     if match:
         try:
             return json.loads(match.group(1))
