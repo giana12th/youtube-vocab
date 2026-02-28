@@ -1,0 +1,12 @@
+[project]
+name = "youtube-vocab"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pip>=26.0.1",
+    "spacy>=3.8.11",
+    "wordfreq>=3.1.1",
+    "youtube-transcript-api>=1.2.4",
+]
