@@ -51,7 +51,7 @@ All intermediate files live in `output/` with this prefix.
 ### Key Design Points
 
 - `_source.txt` is skipped (not regenerated) if it already exists; steps 2-4 always regenerate
-- `extractor.py` filters to ADJ/ADV/VERB with `zipf_frequency < 4.0`, capped at 20 words. The zipf threshold is configured in `config.py`
+- `extractor.py` filters to ADJ/ADV/VERB with `2.0 <= zipf_frequency < 5.0` (bandpass filter), capped at 20 words. The zipf range is configured in `config.py`
 - `explainer.py` calls `claude -p` via `subprocess.run(..., input=prompt_text)` (stdin, not shell args). Prompt is saved to `_prompt.md` for debugging
 - Claude's JSON response uses 3-stage fallback parsing (`json.loads` → extract from ` ```json ``` ` → extract `[...]`)
 - `choices` are shuffled in `explainer.py`; `quiz.py` shuffles question order but not choices

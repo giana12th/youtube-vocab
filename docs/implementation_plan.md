@@ -100,11 +100,11 @@ youtube-vocab/
 2. spaCy で文境界検出・品詞判定・lemma抽出
 3. 対象品詞：`ADJ` / `ADV` / `VERB` のみ
 4. wordfreq の `zipf_frequency(word, 'en')` でスコアを取得
-5. zipf ≥ 4.0 の高頻出語を除外（上位約3,000〜5,000語相当）
+5. バンドパスフィルタ適用：zipf < 2.0（未登録語・ミーム等）およびzipf >= 5.0（基礎的すぎる語）を除外
 6. 同一単語の重複排除（最初の出現文を採用）
 7. 20件超の場合は絞り込みルールを適用：
    - 品詞優先順位：ADJ > ADV > VERB
-   - 同品詞内はzipfスコア昇順（低い＝希少）
+   - 同品詞内はzipfスコア降順（高い＝一般的＝学習価値が高い）
    - 同スコアは出現順
 8. `_wordlist.json` に出力（最大20件）
 
@@ -225,7 +225,7 @@ def detect_latest_session() -> str:
 |---|---|
 | `pos` の値 | spaCy の `token.pos_` が返す文字列（`"ADJ"` / `"ADV"` / `"VERB"`）をそのまま使う |
 | `sentence` の取得 | spaCy の `token.sent` で文を取得。前後の文は含めない |
-| zipf スコアのしきい値 | `zipf_frequency(word, 'en') >= 4.0` を除外（`json_format_spec.md`） |
+| zipf スコアのしきい値 | `2.0 <= zipf_frequency(word, 'en') < 5.0` のみ採用（`json_format_spec.md`） |
 | Ctrl+C の扱い | `try/except KeyboardInterrupt` で捕捉し、ファイル出力せず終了 |
 | `choices` のシャッフル | `explainer.py` 生成時に実施済み。`quiz.py` では再シャッフルしない |
 | クイズ問題順 | `quiz.py` がロード時にシャッフル（`quiz.json` の順序に依存しない） |

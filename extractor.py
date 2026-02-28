@@ -43,7 +43,8 @@ def run(session_id: str) -> None:
 
     # lemma をキーに重複排除（最初の出現文を採用）
     seen: dict[str, dict] = {}
-    zipf_threshold = float(config.zipf)
+    zipf_min = float(config.zipf_min)
+    zipf_max = float(config.zipf_max)
 
     for token in doc:
         if token.pos_ not in TARGET_POS:
@@ -52,7 +53,7 @@ def run(session_id: str) -> None:
         if lemma in seen:
             continue
         zf = zipf_frequency(lemma, "en")
-        if zf >= zipf_threshold:
+        if zf < zipf_min or zf >= zipf_max:
             continue
         sentence = token.sent.text.strip()
         seen[lemma] = {
@@ -65,10 +66,10 @@ def run(session_id: str) -> None:
 
     candidates = list(seen.values())
 
-    # 20件超の場合: 品詞優先(ADJ>ADV>VERB) → zipf昇順 → 出現順
+    # 20件超の場合: 品詞優先(ADJ>ADV>VERB) → zipf降順 → 出現順
     if len(candidates) > MAX_WORDS:
         candidates.sort(
-            key=lambda w: (POS_PRIORITY[w["pos"]], w["_zipf"], w["_order"])
+            key=lambda w: (POS_PRIORITY[w["pos"]], -w["_zipf"], w["_order"])
         )
         candidates = candidates[:MAX_WORDS]
 
